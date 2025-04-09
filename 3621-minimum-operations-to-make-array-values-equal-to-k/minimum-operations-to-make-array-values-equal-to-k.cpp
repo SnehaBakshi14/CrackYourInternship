@@ -1,7 +1,7 @@
 class Solution {
 public:
     int minOperations(vector<int>& nums, int k) {
-        unordered_set<int> s;
+        set<int> s;
         for(int i : nums){
             if(i < k)return -1;
             if(i > k){
