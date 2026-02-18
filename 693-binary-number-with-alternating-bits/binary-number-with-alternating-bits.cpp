@@ -1,14 +1,16 @@
 class Solution {
 public:
-    bool hasAlternatingBits(int n) {
-        bitset<32>b(n);
-        int bits = log2(n);
-        for(int i =0;i<= bits ; i++)
+    bool hasAlternatingBits(int n) 
+    {
+        int currbit = n%2;
+        n = n/2;
+        while(n > 0)
         {
-            if(b[i] == b[i+1]) return false;
-
+            if(currbit == n%2)return false;
+            currbit = n%2;
+            n = n/2;
         }
+        
         return true;
     }
-    // TC 0{LOGN}
 };
