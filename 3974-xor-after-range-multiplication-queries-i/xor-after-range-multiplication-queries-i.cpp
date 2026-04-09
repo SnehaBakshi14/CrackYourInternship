@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int M = 1e9+7;
+    int xorAfterQueries(vector<int>& nums, vector<vector<int>>& queries) 
+    {
+        for(auto q : queries)
+        {
+            int l = q[0];
+            int r = q[1];
+            int k = q[2];
+            int v = q[3];
+
+            while(l<=r)
+            {
+                nums[l] = (1LL * nums[l] * v) % M;// multiply by 1LL to make it in long as the result could be very large
+                l+= k;
+            }
+        }
+        int res =0;
+        for(int &n : nums)
+        {
+            res ^= n;
+        }
+        return res;
+        
+    }
+};
