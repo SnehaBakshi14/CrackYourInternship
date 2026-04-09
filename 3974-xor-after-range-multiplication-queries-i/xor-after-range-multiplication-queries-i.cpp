@@ -22,6 +22,6 @@ public:
             res ^= n;
         }
         return res;
-        
+        // TC O(no  of queries )* O(nums)
     }
 };
