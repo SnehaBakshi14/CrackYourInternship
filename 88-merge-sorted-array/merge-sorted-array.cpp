@@ -1,28 +1,33 @@
 class Solution {
 public:
-    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) 
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n)
     {
-        int left = m-1;
-        int right = 0;
-        while(left >= 0 && right < n)
+        int i = m-1;
+        int j = n-1;
+        int k = m+n-1; // for sorted final array
+        // as we have to do it in inplace in nums1 instead of sorting through start sort from last as we have space there
+        while(i>=0 && j>=0)
         {
-            if(nums1[left] > nums2[right])
+            if(nums1[i] >= nums2[j])
             {
-                swap(nums1[left], nums2[right]);
-                left--;
-                right++;
+                nums1[k] = nums1[i];
+                k--;
+                i--;
             }
             else
             {
-                break; // in correct order
+                nums1[k] = nums2[j];
+                j--;
+                k--;        
+                            
             }
         }
-        sort(nums1.begin(),nums1.begin()+m);
-         sort(nums2.begin(),nums2.end());
-
-         for(int i =0;i<n;i++)
-         {
-            nums1[i+m] = nums2[i];
-         }
+        while(j>=0) // nums1 is over and nums2 have elemnets 
+        {
+            nums1[k] = nums2[j];
+            k--;
+            j--;
+        }
+     // TC O(m+n)
     }
 };
