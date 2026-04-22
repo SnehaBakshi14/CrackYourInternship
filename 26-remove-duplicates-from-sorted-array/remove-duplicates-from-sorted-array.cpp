@@ -2,17 +2,23 @@ class Solution {
 public:
     int removeDuplicates(vector<int>& nums) 
     {
-         int n =  nums.size();
-         int i =0 , j= 1; // i represents unique number , j brings unique number to i
-         while(j <n)
-         {
-            if(nums[i] != nums[j]) // unique element found 
+        int n = nums.size();
+        int i =1, j= 1;// first element is always unique keeping it 
+        // 2 pointers for  One, that would keep track of the current element in the original array and another one for just the unique elements.
+        while( j < n)
+        {
+            if(nums[j] == nums[i-1])
             {
-                i++;
-                nums[i] = nums[j];
+                j++;
             }
-            j++;
-         }    
-         return (i+1);
+            else
+            {
+                nums[i] = nums[j];
+                i++;
+                j++;
+            }
+        }
+        return i ;
     }
+    // TC O(n)
 };
