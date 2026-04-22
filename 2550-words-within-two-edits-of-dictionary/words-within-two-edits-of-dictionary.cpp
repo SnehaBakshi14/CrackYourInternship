@@ -26,4 +26,6 @@ public:
         }
         return result;
     }
+    //T.C : O(q * d * n), q = queries.size(), d = dictionary.size(), n = query[i].length()
+//S.C : O(1)
 };
