@@ -2,17 +2,25 @@ class Solution {
 public:
     int majorityElement(vector<int>& nums) 
     {
-        unordered_map<int,int>mp;
         int n = nums.size();
-        for(int &x : nums)
+        int candidate ; // current guess
+        int cnt  =0;
+        for(int i =0;i<n;i++)
         {
-            mp[x]++;
-            if(mp[x] > floor(n/2))
+            if(cnt == 0)
             {
-                return x;
-                break;
+                candidate = nums[i];
             }
+            if(nums[i] == candidate)
+            {
+                cnt ++;
+            }
+            else 
+            {
+                cnt--;
+            }
+            
         }
-        return 0;
-    }
+        return candidate;
+    }// TC o(n) SC O(1)
 };
