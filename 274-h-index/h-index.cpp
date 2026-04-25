@@ -1,18 +1,24 @@
 class Solution {
 public:
-    int hIndex(vector<int>& citations) 
-    {
-        int n = citations.size();
-        sort(citations.begin(), citations.end());
-        int hindex = 0  ;
-        for(int i =0; i<n;i++)
-        {
-            if(citations[i] >= (n-i))
-            {
-                hindex = max(hindex , n-i);
+    int hIndex(vector<int>& arr) {
+        
+        int n = arr.size();
+        vector<int> bucket(n+1,0);
+        int total = 0;
+        for(int i=0;i<n;i++){
+            if(arr[i] > n){
+                bucket[n]++;
+            }
+            else{
+                bucket[arr[i]]++;
             }
         }
-        return hindex;
+        for(int i=n;i>=0;i--){
+            total += bucket[i];
+            if(total >= i){
+                return i;
+            }
+        }
+        return 0;
     }
-    // TC O(n log n) + O(n) 
 };
