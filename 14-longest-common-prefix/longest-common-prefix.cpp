@@ -1,28 +1,27 @@
 class Solution {
 public:
-    string longestCommonPrefix(vector<string>& strs) 
+    string longestCommonPrefix(vector<string>& strs)
     {
-        if(strs.empty()) return "";
-
+        sort(strs.begin() , strs.end());
+        int n = strs.size();
         string first = strs[0];
+        string last = strs[n-1];
+        // sorting ensures that first and last words will have the maximal difference in their prefix
+        int mini = min(first.length(), last.length());
+        // cannot compare beyond the shorter word
         string prefix = "";
-
-        for(int i = 0; i < first.length(); i++)
+        for(int i =0;i<mini;i++)
         {
-            prefix += first[i];  // build prefix step by step
-
-            for(int j = 1; j < strs.size(); j++)
+            if(first[i] != last[i])
             {
-                // check length condition
-                if(strs[j].length() < prefix.length() || 
-                   strs[j].substr(0, prefix.length()) != prefix)
-                {
-                    return prefix.substr(0, prefix.length() - 1);
-                }
+                return prefix;
+            }
+            else
+            {
+                prefix += first[i];
             }
         }
-
         return prefix;
     }
+    // tc o(n logn + m) sorting + comparision
 };
-
